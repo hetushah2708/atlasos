@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const features = [
   {
     title: "Budget Planner",
@@ -120,6 +122,7 @@ export default function Home() {
                       {item.value}
                     </span>
                   </div>
+
                   <div className="h-2 rounded-full bg-white/10">
                     <div
                       className={`h-2 rounded-full bg-gradient-to-r from-cyan-300 to-violet-400 ${item.widthClass}`}
@@ -147,31 +150,53 @@ export default function Home() {
           <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300">
             Premium toolkit
           </p>
+
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Everything students need to land, learn, and live with confidence.
           </h2>
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature) => (
-            <article
-              key={feature.title}
-              className="group relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.06] p-6 shadow-xl shadow-black/20 transition duration-300 hover:-translate-y-2 hover:border-cyan-300/40 hover:bg-white/[0.09]"
-            >
-              <div
-                className={`mb-8 h-12 w-12 rounded-lg bg-gradient-to-br ${feature.accent} p-[1px] shadow-lg transition group-hover:scale-110`}
-              >
-                <div className="h-full w-full rounded-lg bg-[#07111f]/80" />
+
+          {features.map((feature) => {
+            const route =
+              feature.title === "Budget Planner"
+                ? "/budget"
+                : feature.title === "AI Student Assistant"
+                ? "/chat"
+                : null;
+
+            const card = (
+              <article className="group relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.06] p-6 shadow-xl shadow-black/20 transition duration-300 hover:-translate-y-2 hover:border-cyan-300/40 hover:bg-white/[0.09] cursor-pointer">
+                <div
+                  className={`mb-8 h-12 w-12 rounded-lg bg-gradient-to-br ${feature.accent} p-[1px] shadow-lg transition group-hover:scale-110`}
+                >
+                  <div className="h-full w-full rounded-lg bg-[#07111f]/80" />
+                </div>
+
+                <h3 className="text-xl font-semibold text-white">
+                  {feature.title}
+                </h3>
+
+                <p className="mt-4 text-sm leading-6 text-slate-300">
+                  {feature.description}
+                </p>
+
+                <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-cyan-300 via-violet-400 to-emerald-300 opacity-0 transition group-hover:opacity-100" />
+              </article>
+            );
+
+            return route ? (
+              <Link key={feature.title} href={route}>
+                {card}
+              </Link>
+            ) : (
+              <div key={feature.title}>
+                {card}
               </div>
-              <h3 className="text-xl font-semibold text-white">
-                {feature.title}
-              </h3>
-              <p className="mt-4 text-sm leading-6 text-slate-300">
-                {feature.description}
-              </p>
-              <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-cyan-300 via-violet-400 to-emerald-300 opacity-0 transition group-hover:opacity-100" />
-            </article>
-          ))}
+            );
+          })}
+
         </div>
       </section>
     </main>
