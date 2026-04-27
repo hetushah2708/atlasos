@@ -38,24 +38,6 @@ const sampleMessages: Message[] = [
   },
 ];
 
-function getAssistantReply(prompt: string) {
-  const lowerPrompt = prompt.toLowerCase();
-
-  if (lowerPrompt.includes("housing") || lowerPrompt.includes("rent")) {
-    return "Student housing in Sydney varies by suburb and room type. Shared rooms are usually the lowest-cost option, while studios and city-adjacent rooms cost more. Budget for rent, bond, utilities, transport, and basic setup costs before signing anything.";
-  }
-
-  if (lowerPrompt.includes("tfn")) {
-    return "You can apply for a Tax File Number online through the Australian Taxation Office after you arrive in Australia. You will usually need your passport details, Australian address, and visa information.";
-  }
-
-  if (lowerPrompt.includes("work") || lowerPrompt.includes("study")) {
-    return "A strong rhythm is to block fixed study hours first, then place work shifts around lectures, commute time, and assessment deadlines. Keep at least one recovery window each week so your schedule stays realistic.";
-  }
-
-  return "I can help you turn that into a practical student plan. Share your suburb, course load, weekly income, or arrival date and I will map the next steps clearly.";
-}
-
 function Logo() {
   return (
     <a href="/" className="flex items-center gap-3">
@@ -159,15 +141,12 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>(sampleMessages);
   const [draft, setDraft] = useState("");
 
-  function handleSend() {
+  async function handleSend() {
     const content = draft.trim();
 
-    if (!content) {
-      return;
-    }
+    if (!content) return;
 
-    const now = new Date();
-    const time = now.toLocaleTimeString("en-AU", {
+    const time = new Date().toLocaleTimeString("en-AU", {
       hour: "2-digit",
       minute: "2-digit",
     });
@@ -179,15 +158,56 @@ export default function ChatPage() {
       time,
     };
 
-    const assistantMessage: Message = {
-      id: Date.now() + 1,
-      role: "assistant",
-      content: getAssistantReply(content),
-      time,
-    };
-
-    setMessages((current) => [...current, userMessage, assistantMessage]);
+    setMessages((current) => [...current, userMessage]);
     setDraft("");
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: content }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch AI response");
+      }
+
+      const data = await response.json();
+      const aiContent =
+        data.response ??
+        data.reply ??
+        data.message ??
+        "I could not generate a response right now. Please try again.";
+
+      setMessages((current) => [
+        ...current,
+        {
+          id: Date.now() + 1,
+          role: "assistant",
+          content: aiContent,
+          time: new Date().toLocaleTimeString("en-AU", {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        },
+      ]);
+    } catch {
+      setMessages((current) => [
+        ...current,
+        {
+          id: Date.now() + 1,
+          role: "assistant",
+          content:
+            "I am having trouble reaching the AI service right now. Please check the chat API route and try again.",
+          time: new Date().toLocaleTimeString("en-AU", {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        },
+      ]);
+    }
   }
 
   return (
