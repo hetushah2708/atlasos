@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AtlasOS
 
-## Getting Started
+AI-powered operating system for international students.
 
-First, run the development server:
+## Overview
+AtlasOS helps international students manage relocation, budgeting, onboarding, study planning, and AI assistance in one unified platform.
+
+Built as a student productivity SaaS prototype focused on the Australia migration + university journey.
+
+---
+
+## Core Features
+
+### Student Dashboard
+- Personalized onboarding dashboard
+- Readiness scoring
+- Dynamic recommendations
+- Task prioritization
+
+### Arrival Checklist
+- Sydney onboarding checklist
+- Progress tracking
+- Supabase cloud sync
+- Cross-session persistence
+
+### Budget Planner
+- Student expense planning
+- Savings tracking
+- Budget health insights
+
+### Study Helper
+- Productivity tracking
+- Focus support
+- Study planning module
+
+### Atlas Copilot
+- Floating AI assistant
+- Student guidance chatbot
+- Budget / arrival / study help
+
+---
+
+## Tech Stack
+
+- Next.js
+- React
+- Tailwind CSS
+- Supabase
+- OpenAI API
+- Vercel (deployment planned)
+
+---
+
+## Architecture
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Frontend:
+Next.js App Router
+
+Backend:
+Supabase Auth
+Supabase Database
+
+Modules:
+Dashboard
+Arrival
+Budget
+Study
+Atlas Copilot
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Roadmap
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [x] MVP Interface
+- [x] Authentication
+- [x] User Profiles
+- [x] Arrival Checklist Cloud Sync
+- [ ] Budget Supabase Sync
+- [ ] Study Module Persistence
+- [ ] Realtime Copilot Memory
+- [ ] Production Deployment
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Vision
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+AtlasOS aims to become an AI operating system for international students navigating study, migration and life setup abroad.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Local Setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+git clone https://github.com/hetushah2708/atlasos.git
+cd atlasos
+npm install
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Author
+
+Built by Het Shah
