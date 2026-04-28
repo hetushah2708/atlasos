@@ -84,6 +84,17 @@ Atlas Copilot
 
 ---
 
+## Screenshots
+
+### Personalized Dashboard
+![Dashboard](public/screenshots/dashboard.jpeg)
+
+### Budget Planner
+![Budget](public/screenshots/budget-planner.jpeg)
+
+### AI Student Assistant
+![Copilot](public/screenshots/copilot.jpeg)
+
 ## Vision
 
 AtlasOS aims to become an AI operating system for international students navigating study, migration and life setup abroad.
