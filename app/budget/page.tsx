@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useEffect, useState } from "react";
 
 type ExpenseKey = "rent" | "groceries" | "transport" | "phone" | "misc";
 
@@ -130,14 +130,43 @@ function ExpenseBar({
 }
 
 export default function BudgetPlannerPage() {
+
   const [income, setIncome] = useState("3200");
+
   const [expenses, setExpenses] = useState<Record<ExpenseKey, string>>({
     rent: "1600",
     groceries: "480",
     transport: "180",
     phone: "45",
-    misc: "300",
+    misc: "300",  
   });
+
+  useEffect(() => {
+    const savedBudget =
+      localStorage.getItem("atlasBudget");
+
+    if (savedBudget) {
+      const parsed = JSON.parse(savedBudget);
+
+      if (parsed.income) {
+        setIncome(parsed.income);
+      }
+
+      if (parsed.expenses) {
+        setExpenses(parsed.expenses);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "atlasBudget",
+      JSON.stringify({
+        income,
+        expenses
+      })
+    );
+  }, [income, expenses]);
 
   const budget = useMemo(() => {
     const monthlyIncome = toNumber(income);

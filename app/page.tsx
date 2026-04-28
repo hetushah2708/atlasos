@@ -79,17 +79,17 @@ export default function Home() {
 
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
               Atlas AI helps international students budget smarter, get study
-              support, and settle into Sydney with clear guidance for the
-              moments that usually feel overwhelming.
+              support, and settle into Sydney with clear guidance.
             </p>
 
             <div id="start" className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a
-                href="#"
-                className="rounded-full bg-cyan-300 px-8 py-4 text-center text-sm font-bold text-slate-950 shadow-[0_0_35px_rgba(103,232,249,0.35)] transition hover:-translate-y-1 hover:bg-cyan-200"
-              >
-                Get Started
-              </a>
+              <Link
+  href="/onboarding"
+  className="rounded-full bg-cyan-300 px-8 py-4 text-center text-sm font-bold text-slate-950 shadow-[0_0_35px_rgba(103,232,249,0.35)] transition hover:-translate-y-1 hover:bg-cyan-200"
+>
+  Get Started
+</Link>
+
               <a
                 href="#features"
                 className="rounded-full border border-white/15 bg-white/10 px-8 py-4 text-center text-sm font-bold text-white transition hover:-translate-y-1 hover:border-white/30 hover:bg-white/15"
@@ -99,12 +99,13 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-lg border border-white/10 bg-[#08111f]/90 p-5 shadow-2xl shadow-black/40 backdrop-blur-2xl">
+          <div className="relative overflow-hidden rounded-lg border border-white/10 bg-[#08111f]/90 p-5 shadow-2xl shadow-black/40">
             <div className="mb-6 flex items-center justify-between">
               <div>
                 <p className="text-sm text-slate-400">Weekly outlook</p>
                 <p className="mt-1 text-2xl font-semibold">Sydney ready</p>
               </div>
+
               <div className="rounded-full bg-emerald-400/10 px-4 py-2 text-sm font-semibold text-emerald-300">
                 On track
               </div>
@@ -112,15 +113,10 @@ export default function Home() {
 
             <div className="space-y-4">
               {progressItems.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-lg bg-white/[0.05] p-4"
-                >
+                <div key={item.label} className="rounded-lg bg-white/[0.05] p-4">
                   <div className="mb-3 flex items-center justify-between text-sm">
                     <span className="text-slate-300">{item.label}</span>
-                    <span className="font-semibold text-white">
-                      {item.value}
-                    </span>
+                    <span className="font-semibold text-white">{item.value}</span>
                   </div>
 
                   <div className="h-2 rounded-full bg-white/10">
@@ -157,13 +153,14 @@ export default function Home() {
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-
           {features.map((feature) => {
             const route =
               feature.title === "Budget Planner"
                 ? "/budget"
                 : feature.title === "AI Student Assistant"
                 ? "/chat"
+                : feature.title === "Arrival Checklist"
+                ? "/arrival"
                 : null;
 
             const card = (
@@ -196,7 +193,6 @@ export default function Home() {
               </div>
             );
           })}
-
         </div>
       </section>
     </main>

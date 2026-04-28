@@ -22,7 +22,7 @@ export async function POST(req: Request) {
             {
               role: "system",
               content:
-                "You are Atlas AI helping international students in Australia. Reply in under 60 words unless user asks for detail."
+                "Reply under 50 words unless user asks detailed explanation."
             },
             {
               role: "user",
